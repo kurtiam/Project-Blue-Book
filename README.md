@@ -8,4 +8,4 @@ Create a website which customer can look for local events within DFW and find th
 Our user will be anyone who is able to purchase a ticket for an event in the DFW area. We will then give them opions to restaurants and bars in a 5 mile radius to the event venue. All restaurants and bars will have estimate of cost, decor, and service rating. 
 
 User Story:
-As a cusomer, we want to selec the event and search for the restaurants and bars so that we can have estimate of cost, decor, and service rating. 
+As a cusomer, We want to selec the event and search for the restaurants and bars in a 5 mile radius to the event venue, so that we can have estimate of cost, decor, and service rating. 
