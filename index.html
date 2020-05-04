@@ -1,17 +1,110 @@
+<!-- index.hnml for testinmg api calls -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
+    <meta charset="utf-8">
     <title>Project Blue Book </title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
 </head>
 
-Hello World! We are team blue!
-
 <body>
+    <div class="container">
+        <h1> Food Search</h1>
+        <!-- This form will be where users input data about the events -->
+        <label class="toggle">
+            <input type="checkbox" />
+            <span class="slider"></span>
+        </label>
+        <form id="event-form">
 
+            <select id="myList" style="width: 500px;">
+            </select>
+            <br><br>
+            <div id="food-type"></div>
+            <select id="sel_user" style="width: 500px">
+                <option value="0">- Select Food Type-</option>
+            </select>
+            <br>
+            <br>
+
+            <!-- <label for="userId">User</label>
+            <select name="userId" id="userId" class="form-control"
+                data-source="https://app.ticketmaster.com/discovery/v2/venues.json?&latlong=32.79067196,-96.81081803&dmaId=261&apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV"
+                data-valueKey="id" data-displayKey="name"></select> -->
+            <br><br>
+
+
+            <input id="find-venue" type="submit" value="Search" style="width: 500px">
+        </form>
+
+        <div id="venue-view"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "https://app.ticketmaster.com/discovery/v2/venues.json?&latlong=32.79067196,-96.81081803&dmaId=261&apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV",
+                    data: "{}",
+                    success: function (data) {
+                        var s = '<option value="-1">Please Select a Venue</option>';
+                        for (var i = 0; i < data._embedded.venues.length; i++) {
+                            s += '<option value="' + data._embedded.venues[i].name + '">' + data._embedded.venues[i].name + '</option>';
+                        }
+                        $("#myList").html(s);
+                        // console.log(data._embedded.venues.length);
+                        // console.log(s);
+
+                    }
+                });
+
+            });
+
+            $("#find-venue").on("click", function (event) {
+
+                event.preventDefault();
+
+                place = $("#myList option:selected").text()
+
+                // console.log(place);
+
+                var unLocURL = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&keyword=" + place + "&locale=*";
+                var enLocURL = encodeURI(unLocURL);
+                console.log(enLocURL);
+
+                $(document).ready(function () {
+                    $.ajax({
+                        type: "GET",
+                        url: enLocURL,
+                        data: "{}",
+                        success: function (data) {
+                            var loc = data._embedded.venues[0].location
+
+                            // console.log(data._embedded.venues.length);
+                            // console.log(loc);
+                            console.log("Venue: " + place);
+                            console.log("Latitude: " + loc.latitude);
+                            console.log("Longitude: " + loc.longitude);
+
+
+                        }
+                    });
+
+                });
+
+
+
+
+            });
+
+
+
+        </script>
+    </div>
 </body>
 
 </html>
