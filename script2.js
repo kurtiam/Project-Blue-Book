@@ -41,6 +41,11 @@ $(document).ready(function () {
 
     });
 
+    $("#myList").on("change", function (event) {
+
+        event.preventDefault();
+
+
 
     // var longitudeNumber = ;
     // var latitudeNumber = ;
@@ -67,9 +72,57 @@ $(document).ready(function () {
             }
         }
 
+
+        place = $("#myList option:selected").text()
+
+
+        var unLocURL = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&keyword=" + place + "&locale=*";
+        var enLocURL = encodeURI(unLocURL);
+        console.log(enLocURL);
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: enLocURL,
+                data: "{}",
+                success: function (data) {
+                    loc = data._embedded.venues[0].location;
+                    console.log("Venue: " + place);
+                    console.log("Latitude: " + loc.latitude);
+                    console.log("Longitude: " + loc.longitude);
+
+                    // $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>")
+                }
+            });
+
+        });
+
     });
 
+    // var longitudeNumber = ;
+    // var latitudeNumber = ;
+    $("#myList").on("change", function (event) {
 
+        var ZOMATO_APIKEY = "85e3651bab1da1f9c3235bf3ef189884";
+        var ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?count=20&lat=32.7767&lon=-96.803398&radius=5&sort=real_distance&order=asc&apikey=" + ZOMATO_APIKEY;
+
+        $.ajax({
+            url: ZOMATO_URL,
+            method: "GET",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                var autoList = [];
+                var p3 = '<option value="-1">Select Food Type</option>';
+
+                for (var i = 0; i < data.restaurants.length; i++) {
+                    p3 += '<option value="' + data.restaurants[i].restaurant.cuisines + '">' + data.restaurants[i].restaurant.cuisines + '</option>';
+                    autoList += data.restaurants[i].restaurant.cuisines + "<br>"
+                    $("#sel_user").html(p3)
+
+
+                }
+            }
 
 
     // will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
@@ -101,6 +154,26 @@ $(document).ready(function () {
 
         });
 
+        });
     });
+
+
+    // will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
+
+
+});
+
+
+$("#find-venue").on("click", function (event) {
+
+    event.preventDefault();
+    var foodType = "";
+    place = $("#myList option:selected").text();
+    var foodType = $('#sel_user option:selected').text()
+
+    $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "<br>" + foodType + "</p>");
+
+    console.log(foodType);
+
 
 });
