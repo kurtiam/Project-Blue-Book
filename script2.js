@@ -1,7 +1,5 @@
 var page = 0;
 
-
-
 //popluate venues within 25 miles of DFW area. Each page can only show 200 results. Will need to do a 2nd api call and append  
 
 $(document).ready(function () {
