@@ -1,5 +1,7 @@
 var page = 0;
 
+
+
 //popluate venues within 25 miles of DFW area. Each page can only show 200 results. Will need to do a 2nd api call and append  
 
 $(document).ready(function () {
@@ -45,32 +47,30 @@ $(document).ready(function () {
     // var longitudeNumber = ;
     // var latitudeNumber = ;
 
+
     var ZOMATO_APIKEY = "85e3651bab1da1f9c3235bf3ef189884";
-    var ZOMATO_URL = "https://developers.zomato.com/api/v2.1/cuisines?city_id=276&lat=32.7808&lon=-96.803398&apikey=" + ZOMATO_APIKEY;
+    var ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?count=20&lat=32.7767&lon=-96.803398&radius=5&sort=real_distance&order=asc&apikey=" + ZOMATO_APIKEY;
 
+    $.ajax({
+        url: ZOMATO_URL,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            var autoList = [];
+            var p3 = '<option value="-1">Select Food Type</option>';
 
-    $("#sel_user").on("click", function () {
-        $.ajax({
-            url: ZOMATO_URL,
-            method: "GET",
-            async: false,
-            dataType: "json",
-            success: function (data) {
-                var autoList = [];
-                var p3 = '<option value="-1">Select Food Type</option>';
+            for (var i = 0; i < data.restaurants.length; i++) {
+                p3 += '<option value="' + data.restaurants[i].restaurant.cuisines + '">' + data.restaurants[i].restaurant.cuisines + '</option>';
+                autoList += data.restaurants[i].restaurant.cuisines + "<br>"
+                $("#sel_user").html(p3)
 
-                for (var i = 0; i < data.cuisines.length; i++) {
-                    p3 += '<option value="' + data.cuisines[i].cuisine.cuisine_name + '">' + data.cuisines[i].cuisine.cuisine_name + '</option>';
-                    autoList += data.cuisines[i].cuisine.cuisine_name + "<br>"
-                    $("#sel_user").html(p3)
-
-
-                }
 
             }
+        }
 
-        });
     });
+
 
 
 
