@@ -39,18 +39,15 @@ $(document).ready(function () {
 
         }
 
-
-
     });
 
-});
 
-var ZOMATO_APIKEY = "85e3651bab1da1f9c3235bf3ef189884";
-var ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=32.7767&lon=-96.803398&radius=5&sort=real_distance&order=asc&apikey=" + ZOMATO_APIKEY;
+    // var longitudeNumber = ;
+    // var latitudeNumber = ;
 
+    var ZOMATO_APIKEY = "85e3651bab1da1f9c3235bf3ef189884";
+    var ZOMATO_URL = "https://developers.zomato.com/api/v2.1/cuisines?city_id=276&lat=32.7808&lon=-96.803398&apikey=" + ZOMATO_APIKEY;
 
-
-$(document).ready(function () {
 
     $("#sel_user").on("click", function () {
         $.ajax({
@@ -61,49 +58,49 @@ $(document).ready(function () {
             success: function (data) {
                 var autoList = [];
                 var p3 = '<option value="-1">Select Food Type</option>';
-                var cuisines = data.restaurants[0].restaurant.cuisines;
 
-                for (var i = 0; i < cuisines.length; i++) {
-                    p3 += '<option value="' + cuisines[i] + '">' + cuisines + '</option>';
-                    autoList += cuisines + "<br>"
+                for (var i = 0; i < data.cuisines.length; i++) {
+                    p3 += '<option value="' + data.cuisines[i].cuisine.cuisine_name + '">' + data.cuisines[i].cuisine.cuisine_name + '</option>';
+                    autoList += data.cuisines[i].cuisine.cuisine_name + "<br>"
                     $("#sel_user").html(p3)
 
 
                 }
 
-
-
             }
 
         });
     });
-});
 
 
-// will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
-$("#find-venue").on("click", function (event) {
 
-    event.preventDefault();
+    // will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
+    $("#find-venue").on("click", function (event) {
 
-    place = $("#myList option:selected").text()
+        event.preventDefault();
+
+        place = $("#myList option:selected").text()
 
 
-    var unLocURL = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&keyword=" + place + "&locale=*";
-    var enLocURL = encodeURI(unLocURL);
-    console.log(enLocURL);
+        var unLocURL = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&keyword=" + place + "&locale=*";
+        var enLocURL = encodeURI(unLocURL);
+        console.log(enLocURL);
 
-    $(document).ready(function () {
-        $.ajax({
-            type: "GET",
-            url: enLocURL,
-            data: "{}",
-            success: function (data) {
-                var loc = data._embedded.venues[0].location;
-                console.log("Venue: " + place);
-                console.log("Latitude: " + loc.latitude);
-                console.log("Longitude: " + loc.longitude);
-                $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>")
-            }
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: enLocURL,
+                data: "{}",
+                success: function (data) {
+                    var loc = data._embedded.venues[0].location;
+                    console.log("Venue: " + place);
+                    console.log("Latitude: " + loc.latitude);
+                    console.log("Longitude: " + loc.longitude);
+
+                    $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>")
+                }
+            });
+
         });
 
     });
