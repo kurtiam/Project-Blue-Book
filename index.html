@@ -8,33 +8,37 @@
     <link href="style.css" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
-
+    <link href="auto.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
         <h1> Food Search</h1>
 
-        <label class="toggle">
+        <!-- <label class="toggle">
             <input type="checkbox" />
             <span class="slider"></span>
         </label>
-        <br>
+        <br> -->
 
-        <input type="text" name="venue" id="autocomplete" style="width: 500px" /> <br> <br>
+        <!-- <input id="search-textbox" class="topic-picker ui-autocomplete-input" type="text" maxlength="100" name="q"
+            acceskey="b" autocomplete="off" placeholder="enter text" role="textbox" aria-autocomplete="list"
+            aria-haspopup="true" style="width: 500px"> <br> <br> -->
+
+        <!-- <input type="text" name="venue" id="autocomplete" style="width: 500px" /> <br> <br> -->
 
         <form id="event-form">
             <select id="myList" style="width: 500px" autofocus>
             </select>
             <br><br>
+            <input id="find-venue" type="submit" value="Search" style="width: 500px">
+            <br><br>
             <div id="food-type"></div>
             <select id="sel_user" style="width: 500px">
-                <option value="0">- Select Food Type-</option>
+
             </select>
 
             <br><br>
-
-            <input id="find-venue" type="submit" value="Search" style="width: 500px">
         </form>
 
         <div id="venue-view"></div>
@@ -42,11 +46,9 @@
         <p id="location">location test here</p>
     </div>
 
-
-
     <div id="map"></div>
     <div id="events"></div>
-    <script src="https://maps.googleapis.com/maps/api/js" async defer></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js" async defer></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
