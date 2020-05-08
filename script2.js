@@ -1,7 +1,6 @@
 var page = 0;
 
 //popluate venues within 25 miles of DFW area. Each page can only show 200 results. Will need to do a 2nd api call and append  
-
 $(document).ready(function () {
     $.ajax({
         type: "GET",
@@ -17,11 +16,11 @@ $(document).ready(function () {
                 // autoList += JSON.stringify(data._embedded.venues[i].name)
                 $("#myList").html(p0)
                 // $('#venue-view').html(autoList)
-                // autoList = data._embedded.venues[i].name
-                // autoList2 += autoList.name
+                autoList = data._embedded.venues[i].name
+                autoList2 += autoList.name
                 // console.log(autoList)
                 $("input#search-textbox").autocomplete({
-                    // source: [autoList]
+                    source: [autoList]
                 });
 
             }
@@ -47,20 +46,19 @@ $(document).ready(function () {
             }
 
         }
-
-
     });
 
 });
 
+
+
+
+
 // will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
-$("#sel_user").on("change", function (event) {
+$("#myList").on("change", function (event) {
 
     event.preventDefault();
-
     place = $("#myList option:selected").text()
-
-
     var unLocURL = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&keyword=" + place + "&locale=*";
     var enLocURL = encodeURI(unLocURL);
     console.log(enLocURL);
@@ -81,53 +79,75 @@ $("#sel_user").on("change", function (event) {
 
     });
 
-});
 
-
-
-
-
-
-$("#myList").on("change", function (event) {
-
-    event.preventDefault();
-
-
-    var ZOMATO_APIKEY = "85e3651bab1da1f9c3235bf3ef189884";
-    var ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?count=20&lat=32.7767&lon=-96.803398&radius=5&sort=real_distance&order=asc&apikey=" + ZOMATO_APIKEY;
-
-    $.ajax({
-        url: ZOMATO_URL,
-        method: "GET",
-        async: false,
-        dataType: "json",
-        success: function (data) {
-            var autoList = [];
-            var p3 = '<option value="-1">Select Food Type</option>';
-
-            for (var i = 0; i < data.restaurants.length; i++) {
-                p3 += '<option value="' + data.restaurants[i].restaurant.cuisines + '">' + data.restaurants[i].restaurant.cuisines + '</option>';
-                autoList += data.restaurants[i].restaurant.cuisines + "<br>"
-                $("#sel_user").html(p3)
-
-
-            }
-        }
-    });
 });
 
 
 $("#find-venue").on("click", function (event) {
 
     event.preventDefault();
-    var foodType = "";
     place = $("#myList option:selected").text();
-    var foodType = $('#sel_user option:selected').text()
 
-    $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "<br>" + foodType + "</p>");
-    console.log("Venue: " + place);
-    console.log("Latitude: " + loc.latitude);
-    console.log("Longitude: " + loc.longitude);
-    console.log(foodType);
+    $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>");
+
+    // console.log(foodType);
+
+
+    ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68",
+
+        $.ajax({
+            url: ZOMATO_URL,
+            method: "GET",
+            async: false,
+            dataType: "json",
+            timeout: 5000,
+            success: function (data) {
+                autoList = [];
+                p3 = '<option value="-1"></option>';
+
+                for (var i = 0; i < data.restaurants.length; i++) {
+                    p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
+                    autoList += data.restaurants[i].restaurant.cuisines + "<br>"
+                    $("#location").html(p3)
+
+
+                }
+            }
+        });
+
+
+    ZOMATO_URL2 = "https://developers.zomato.com/api/v2.1/search?count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
+    $.ajax({
+        url: ZOMATO_URL2,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        timeout: 5000,
+        success: function (data1) {
+            autoList1 = [];
+            p4 = '<option value="-1">Select Food Type</option>';
+
+            for (var i = 0; i < data1.restaurants.length; i++) {
+                p4 += '<option value="' + data1.restaurants[i].restaurant.cuisines + '">' + data1.restaurants[i].restaurant.cuisines + '</option>';
+                autoList1 += data1.restaurants[i].restaurant.cuisines + "<br>"
+                $("#sel_user").html(p4)
+
+
+            }
+            [].slice.call(sel_user.options)
+                .map(function (a) {
+                    if (this[a.innerText]) {
+                        sel_user.removeChild(a);
+                    } else {
+                        this[a.innerText] = 1;
+                    }
+                }, {});
+
+        }
+    });
+
+
 
 });
+
+
