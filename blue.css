@@ -76,9 +76,18 @@ font-family: 'Lobster', cursive;
     }
 
 #event-form {
-    width: 33.33%;
-    z-index: 2;
-    margin-right: 50px;
+    width: 50%;
+    height: auto;
+    /* z-index: 2; */
+    /* margin-right: 50px; */
+    position: relative;
+}
+
+#find-venue {
+  width: 100%;
+    height: auto;
+    /* z-index: 2; */
+    /* margin-right: 50px; */
     position: relative;
 }
 
