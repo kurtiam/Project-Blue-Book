@@ -78,141 +78,56 @@ $(document).ready(function () {
     });
 
 
-
-
     $("#find-venue").on("click", function (event) {
 
         event.preventDefault();
 
-        // $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>");
-        // console.log(foodType);
+        $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>");
 
 
-        // ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
+        ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
 
-        // $.ajax({
-        //     url: ZOMATO_URL,
-        //     method: "GET",
-        //     async: false,
-        //     dataType: "json",
-        //     timeout: 5000,
-        //     success: function (data) {
-        //         autoList = [];
-        //         p3 = '<option value="-1"></option>';
-
-        //         for (var i = 0; i < data.restaurants.length; i++) {
-        //             p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
-        //             autoList += data.restaurants[i].restaurant.name + "<br>"
-        //             // $("#location").html(p3)
-
-
-        //         }
-        //     }
-        // });
-
-
-        ZOMATO_URL2 = "https://developers.zomato.com/api/v2.1/search?count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
         $.ajax({
-            url: ZOMATO_URL2,
+            url: ZOMATO_URL,
             method: "GET",
             async: false,
             dataType: "json",
             timeout: 5000,
-            success: function (data1) {
-                autoList1 = [];
-                p4 = '<option value="-1">Select Food Type</option>';
+            success: function (data) {
+                autoList = [];
+                p3 = '<option value="-1"></option>';
 
+                for (var i = 0; i < data.restaurants.length; i++) {
+                    p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
+                    autoList += data.restaurants[i].restaurant.name + "<br>"
+                    // $("#location").html(p3)
 
-                for (var i = 0; i < data1.restaurants.length; i++) {
-                    p4 += '<option value="' + data1.restaurants[i].restaurant.cuisines + '">' + data1.restaurants[i].restaurant.cuisines + '</option>';
-                    autoList1 += data1.restaurants[i].restaurant.cuisines + "<br>"
-                    $("#sel_user").html(p4)
-
-                }
-                [].slice.call(sel_user.options)
-                    .map(function (a) {
-                        if (this[a.innerText]) {
-                            sel_user.removeChild(a);
-                        } else {
-                            this[a.innerText] = 1;
-                        }
-                    }, {});
-
-            }
-
-        });
-
-        ZOMATO_URL3 = "https://developers.zomato.com/api/v2.1/cuisines?city_id=276&lat=" + loc.lat + "&lon=" + loc.longitude + "&apikey=328747b9fe3568204c420f6a98d2be68";
-        $.ajax({
-            url: ZOMATO_URL3,
-            method: "GET",
-            async: false,
-            dataType: "json",
-            timeout: 5000,
-            success: function (data3) {
-                for (var i = 0; i < data3.cuisines.length; i++) {
-
-                    var option = $("<option>");
-                    option.val(data3.cuisines[i].cuisine.cuisine_name);
-                    option.text(data3.cuisines[i].cuisine.cuisine_name);
-                    option.attr("data-cuisineID", data3.cuisines[i].cuisine.cuisine_id);
-                    $("#sel_user").append(option);
-
-                }
-
-            }
-
-        });
-
-    });
-
-
-    $("#sel_user").on("change", function (event) {
-        event.preventDefault();
-
-        cuisine = $("sel_user option:selected").val();
-        cuisineID = $("sel_user option:selected").attr("data-cuisineID");
-
-        ZOMATO_URL4 = "https://developers.zomato.com/api/v2.1/search?count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance" + "&cuisines=" + cuisineID + "&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
-
-        $.ajax({
-            url: ZOMATO_URL4,
-            method: 'GET',
-            dataType: "json",
-            data: {
-                cuisines: cuisineID
-            },
-            processData: true,
-            success: function (data2) {
-
-                for (var i = 0; i < data2.restaurants.length; i++) {
                     var anchor = $("<a>");
                     var mainDiv = $("<div>");
                     var p = $("<p>");
-                    var priceRange = data2.restaurants[i].restaurant.price_range;
+                    var priceRange = data.restaurants[i].restaurant.price_range;
                     var span = $("<span>");
                     var subDiv1 = $("<div>");
                     var subDiv2 = $("<div>");
                     var subDiv3 = $("<div>");
 
-                    subDiv1.append(data2.restaurants[i].restaurant.name);
-                    subDiv1.addClass("venueName");
-                    subDiv2.append(data2.restaurants[i].restaurant.location.city);
-                    subDiv2.addClass("venueCity");
-                    subDiv3.append(data2.restaurants[i].restaurant.location.address + "<hr>");
-                    p.append("Cuisines: " + data2.restaurants[i].restaurant.cuisines + "<br>");
+                    subDiv1.append(data.restaurants[i].restaurant.name);
+                    subDiv1.addClass("venueName")
+                    subDiv1.attr("href", data.restaurants[i].restaurant.url);
+                    subDiv1.attr("target", "_blank");
+                    // subDiv2.append(data.restaurants[i].restaurant.location.city);
+                    // subDiv2.addClass("venueCity");
+                    subDiv3.append(data.restaurants[i].restaurant.location.address + "<hr>");
+                    p.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
                     for (var cost = 0; cost < priceRange; cost++) {
                         span.append("$");
                     }
                     p.append("Cost: ", span);
-                    anchor.attr("href", data2.restaurants[i].restaurant.url);
-                    anchor.attr("target", "_blank");
-                    anchor.text("Visit Zomato Restaurant Page");
                     p.append("<br>");
-                    p.append(anchor);
+                    p.append(subDiv1);
                     subDiv3.append(p);
                     mainDiv.append(subDiv1);
-                    mainDiv.append(subDiv2);
+                    // mainDiv.append(subDiv2);
                     mainDiv.append(subDiv3);
                     mainDiv.addClass("venues");
 
@@ -221,10 +136,8 @@ $(document).ready(function () {
 
                 }
             }
+        });
 
-        })
-
-
-    })
+    });
 
 });
