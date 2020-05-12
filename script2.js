@@ -48,91 +48,91 @@ $(document).ready(function () {
         }
     });
 
+});
 
+// will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
+$("#myList").on("change", function (event) {
 
-    // will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
-    $("#myList").on("change", function (event) {
+    event.preventDefault();
+    place = $("#myList option:selected").text()
+    var unLocURL = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&keyword=" + place + "&locale=*";
+    var enLocURL = encodeURI(unLocURL);
+    console.log(enLocURL);
 
-        event.preventDefault();
-        place = $("#myList option:selected").text()
-        var unLocURL = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&keyword=" + place + "&locale=*";
-        var enLocURL = encodeURI(unLocURL);
-        console.log(enLocURL);
-
-        $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: enLocURL,
-                data: "{}",
-                success: function (data) {
-                    loc = data._embedded.venues[0].location
-                    // console.log("Venue: " + place);
-                    // console.log("Latitude: " + loc.latitude);
-                    // console.log("Longitude: " + loc.longitude);
-                    // $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>")
-                }
-            });
-
-        });
-
-    });
-
-
-    $("#find-venue").on("click", function (event) {
-
-        event.preventDefault();
-
-
-        ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
-
+    $(document).ready(function () {
         $.ajax({
-            url: ZOMATO_URL,
-            method: "GET",
-            async: false,
-            dataType: "json",
-            timeout: 5000,
+            type: "GET",
+            url: enLocURL,
+            data: "{}",
             success: function (data) {
-                autoList = [];
-                p3 = '<option value="-1"></option>';
-
-                for (var i = 0; i < data.restaurants.length; i++) {
-                    p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
-                    autoList += data.restaurants[i].restaurant.name + "<br>"
-
-
-                    var anchor = $("<a>");
-                    var mainDiv = $("<div>");
-                    var p = $("<p>");
-                    var priceRange = data.restaurants[i].restaurant.price_range;
-                    var span = $("<span>");
-                    var subDiv1 = $("<div>");
-                    var subDiv2 = $("<div>");
-
-
-                    anchor.append(data.restaurants[i].restaurant.name);
-                    anchor.addClass("venueName");
-                    anchor.attr("href", data.restaurants[i].restaurant.url);
-                    anchor.attr("target", "_blank");
-                    subDiv2.append(data.restaurants[i].restaurant.location.address + "<hr>");
-                    p.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
-                    for (var cost = 0; cost < priceRange; cost++) {
-                        span.append("$");
-                    }
-                    p.append("Cost: ", span);
-                    p.append("<br>");
-                    p.append(anchor);
-                    subDiv2.append(p);
-                    mainDiv.append(anchor);
-                    mainDiv.append(subDiv2);
-                    mainDiv.addClass("venues");
-
-                    $("#location").append(mainDiv);
-
-
-                }
+                loc = data._embedded.venues[0].location
+                // console.log("Venue: " + place);
+                // console.log("Latitude: " + loc.latitude);
+                // console.log("Longitude: " + loc.longitude);
+                // $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>")
             }
         });
 
     });
 
 });
+
+
+$("#find-venue").on("click", function (event) {
+    $('#location').empty();
+
+    event.preventDefault();
+
+
+    ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
+
+    $.ajax({
+        url: ZOMATO_URL,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        timeout: 5000,
+        success: function (data) {
+            autoList = [];
+            p3 = '<option value="-1"></option>';
+
+            for (var i = 0; i < data.restaurants.length; i++) {
+                p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
+                autoList += data.restaurants[i].restaurant.name + "<br>"
+
+
+                var anchor = $("<a>");
+                var mainDiv = $("<div>");
+                var p = $("<p>");
+                var priceRange = data.restaurants[i].restaurant.price_range;
+                var span = $("<span>");
+                var subDiv1 = $("<div>");
+                var subDiv2 = $("<div>");
+                anchor.append(data.restaurants[i].restaurant.name);
+                anchor.addClass("venueName");
+                anchor.attr("href", data.restaurants[i].restaurant.url);
+                anchor.attr("target", "_blank");
+                subDiv2.append(data.restaurants[i].restaurant.location.address + "<br>");
+                subDiv2.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
+                for (var cost = 0; cost < priceRange; cost++) {
+                    span.append("$");
+                }
+                subDiv2.append("Cost: ", span);
+
+                p.append("<hr>");
+                p.append(anchor);
+                subDiv2.append(p);
+                mainDiv.append(anchor);
+                mainDiv.append(subDiv1);
+                mainDiv.append(subDiv2);
+                mainDiv.addClass("venues");
+                $("#location").append(mainDiv);
+
+            }
+        }
+    });
+
+});
+
+
+
