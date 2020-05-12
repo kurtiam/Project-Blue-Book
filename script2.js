@@ -110,7 +110,6 @@ $(document).ready(function () {
 
 
                     anchor.append(data.restaurants[i].restaurant.name);
-                    anchor.addClass("venueName");
                     anchor.attr("href", data.restaurants[i].restaurant.url);
                     anchor.attr("target", "_blank");
                     subDiv2.append(data.restaurants[i].restaurant.location.address + "<hr>");
@@ -124,12 +123,12 @@ $(document).ready(function () {
                     subDiv2.append(p);
                     mainDiv.append(anchor);
                     mainDiv.append(subDiv2);
-                    mainDiv.addClass("venues");
 
                     $("#location").append(mainDiv);
 
-
                 }
+
+
             }
         });
 
