@@ -83,54 +83,6 @@ $("#find-venue").on("click", function (event) {
 
     event.preventDefault();
 
-<<<<<<< HEAD
-        $.ajax({
-            url: ZOMATO_URL,
-            method: "GET",
-            async: false,
-            dataType: "json",
-            timeout: 5000,
-            success: function (data) {
-                autoList = [];
-                p3 = '<option value="-1"></option>';
-
-                for (var i = 0; i < data.restaurants.length; i++) {
-                    p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
-                    autoList += data.restaurants[i].restaurant.name + "<br>"
-
-
-                    var anchor = $("<a>");
-                    var mainDiv = $("<div>");
-                    var p = $("<p>");
-                    var priceRange = data.restaurants[i].restaurant.price_range;
-                    var span = $("<span>");
-                    var subDiv1 = $("<div>");
-                    var subDiv2 = $("<div>");
-
-
-                    anchor.append(data.restaurants[i].restaurant.name);
-                    anchor.attr("href", data.restaurants[i].restaurant.url);
-                    anchor.attr("target", "_blank");
-                    subDiv2.append(data.restaurants[i].restaurant.location.address + "<hr>");
-                    p.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
-                    for (var cost = 0; cost < priceRange; cost++) {
-                        span.append("$");
-                    }
-                    p.append("Cost: ", span);
-                    p.append("<br>");
-                    p.append(anchor);
-                    subDiv2.append(p);
-                    mainDiv.append(anchor);
-                    mainDiv.append(subDiv2);
-
-                    $("#location").append(mainDiv);
-
-                }
-
-
-            }
-        });
-=======
 
     ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
 
@@ -157,7 +109,6 @@ $("#find-venue").on("click", function (event) {
                 var subDiv1 = $("<div>");
                 var subDiv2 = $("<div>");
                 anchor.append(data.restaurants[i].restaurant.name);
-                anchor.addClass("venueName");
                 anchor.attr("href", data.restaurants[i].restaurant.url);
                 anchor.attr("target", "_blank");
                 subDiv2.append(data.restaurants[i].restaurant.location.address + "<br>");
@@ -166,7 +117,6 @@ $("#find-venue").on("click", function (event) {
                     span.append("$");
                 }
                 subDiv2.append("Cost: ", span);
->>>>>>> master
 
                 p.append("<hr>");
                 p.append(anchor);
@@ -174,7 +124,6 @@ $("#find-venue").on("click", function (event) {
                 mainDiv.append(anchor);
                 mainDiv.append(subDiv1);
                 mainDiv.append(subDiv2);
-                mainDiv.addClass("venues");
                 $("#location").append(mainDiv);
 
             }
