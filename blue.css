@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+  }
 
 h1 {
     color: grey;
@@ -6,112 +9,97 @@ h1 {
 }
 
 .logo {
-    color: #0b5b9c;
+    color: #084374;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
 }
 
+.navbar-brand{
+    text-align: center;
+}
+
+
+.btn {
+background-color: yellowgreen;
+color: #084374;
+
+}
+
+
 .tagLine {
     text-align: center;
-    background-color: #0b5b9c;
+    background-color: #084374;
     color: white;
-    padding: 10px;
     font-family: 'BenchNine', sans-serif;
     width: 100%;
+    height: 50px;
+    padding-top: 7px;
+  margin: 0px;
 }
 
-.row {
-    background-color: yellowgreen;
-    height: 400px;
+.container-fluid {
+background-image: linear-gradient(rgb(170, 165, 165), yellowgreen, #0b5b9c);
+width: 100vw;
+height: 100vh;
+background-position: center;
+position: absolute;
 }
 
-#photo1 {
-    object-fit: cover;
-    width: 95%; /* width of container */
-    height: 400px; /* height of container */
-    z-index: 0;
-    position: absolute;
+.column {
+    float: left;
+    width: 100%;
+   height: 750px; 
+   position: relative;
+  
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  img {
+      height: 750px;
+      width: 100%;
+      z-index: 1;
+      margin: 0px;
+  }
     
+    h2 { 
+        z-index: 2;
+        position: relative;
+margin-left: 170px;
+padding-top: 0px;
+color: #ad3a0c;
+font-family: 'Lobster', cursive;
     }
 
-.colorBlock1, .foodRow {
-    background-color: yellowgreen;
-    height: 400px;
+#event-form {
+    width: 50%;
+    height: auto;
+    /* z-index: 2; */
+    /* margin-right: 50px; */
+    position: relative;
 }
 
-    h2 { 
-        z-index: 1;
-        position: relative;
-margin-left: 350px;
-padding-top: 100px;
-color: #ad3a0c;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    .form-inline {
-        z-index: 1;
-        position: relative;
-        margin-left: 190px;
-       padding-top: 40px;
-        
-    }
-
-.foodTitle {
-    color: #0b5b9c;
-    font-size: 100px;
-    font-family: 'Pacifico', cursive;
-    font-stretch: extra-expanded;
-    font-weight: 1200px;
-    margin-right: 1000px;
-    margin-left: 40px;
-  text-align: center;
-   margin-top: -370px;
-           }
-
-    #photo2 {
-        object-fit: cover;
-        z-index: 0;
-        position: absolute;
-        width: 100%;
-        height: 400px;
-        margin-left: 440px;
-      
-    }
-
-    .moveText {
-        z-index: 1;
-        position: relative;
-       margin-left: 600px;
-       padding-top: 40px;
-        
-    }
-
-    .moveTable {
-        margin-left: 700px;
-    }
+#find-venue {
+  width: 100%;
+    height: auto;
+    /* z-index: 2; */
+    /* margin-right: 50px; */
+    position: relative;
+}
 
 
 .display-3 {
     text-align: center;
-    background-color: #0b5b9c;
+    background-color:#084374;
     color: white;
     padding: 10px;
     font-family: 'BenchNine', sans-serif;
     
 }
-
-header {
-    writing-mode: vertical-rl;
-    text-orientation: sideways-right;
-    color: #0b5b9c;
-    font-size: 100px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 1200px;
-    margin-left: 1280px;
- margin-top: -230px;
- font-stretch: ultra-expanded;
-   
-        }
         
 .custom-control-label {
     color:  #0b5b9c;
@@ -122,20 +110,77 @@ header {
     color: yellowgreen;
 }
 
-.TorT1 {
-    font-family: 'Lobster', cursive;
-    color: #0b5b9c;
-}
 
 #lastrow {
     width: 100%;
-      background-color:  #0b5b9c;
-      color: white;
+      background-color:  #084374;
+      height: 50px;
+      color:yellowgreen;
       text-align: center;
-      height: 60px;
-      margin-top: 0px;
-      padding-top: 20px;
+     bottom: 0;
+     position: fixed;
+     padding-top: 10px;
     }
+
+    /* Hide default input */
+.toggle input {
+    display: none;
+  }
   
+  /* The container and background */
+  .toggle {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-color: #eb10d8; */
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    transition: all 0.4s;
+  }
+  
+  /* The sliding button */
+  .slider:before {
+    position: absolute;
+    content: "";
+    width: 38px;
+    height: 24px;
+    left: 1px;
+    top: 2px;
+    background-color: rgb(121, 120, 120);
+    border-radius: 5px;
+    transition: all 0.4s;
+  }
+  
+  /* On checked */
+  /* input:checked + .slider {
+    background-color: #0c45e2;
+  } */
+  input:checked + .slider:before {
+    transform: translateX(40px);
+  }
 
-
+/* "OFF" Text */
+.slider:after {
+    position: absolute;
+    content: "Venue";
+    top: 6px;
+    right: 6px;
+    /* color: #fff; */
+    font-size: 0.7em;
+  }
+  
+  /* "ON" Text */
+  input:checked + .slider:after {
+    content: "Event";
+    left: 5px;
+  }
