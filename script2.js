@@ -82,8 +82,6 @@ $(document).ready(function () {
 
         event.preventDefault();
 
-        $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>");
-
 
         ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
 
@@ -100,7 +98,7 @@ $(document).ready(function () {
                 for (var i = 0; i < data.restaurants.length; i++) {
                     p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
                     autoList += data.restaurants[i].restaurant.name + "<br>"
-                    // $("#location").html(p3)
+
 
                     var anchor = $("<a>");
                     var mainDiv = $("<div>");
@@ -109,26 +107,23 @@ $(document).ready(function () {
                     var span = $("<span>");
                     var subDiv1 = $("<div>");
                     var subDiv2 = $("<div>");
-                    var subDiv3 = $("<div>");
 
-                    subDiv1.append(data.restaurants[i].restaurant.name);
-                    subDiv1.addClass("venueName")
-                    subDiv1.attr("href", data.restaurants[i].restaurant.url);
-                    subDiv1.attr("target", "_blank");
-                    // subDiv2.append(data.restaurants[i].restaurant.location.city);
-                    // subDiv2.addClass("venueCity");
-                    subDiv3.append(data.restaurants[i].restaurant.location.address + "<hr>");
+
+                    anchor.append(data.restaurants[i].restaurant.name);
+                    anchor.addClass("venueName");
+                    anchor.attr("href", data.restaurants[i].restaurant.url);
+                    anchor.attr("target", "_blank");
+                    subDiv2.append(data.restaurants[i].restaurant.location.address + "<hr>");
                     p.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
                     for (var cost = 0; cost < priceRange; cost++) {
                         span.append("$");
                     }
                     p.append("Cost: ", span);
                     p.append("<br>");
-                    p.append(subDiv1);
-                    subDiv3.append(p);
-                    mainDiv.append(subDiv1);
-                    // mainDiv.append(subDiv2);
-                    mainDiv.append(subDiv3);
+                    p.append(anchor);
+                    subDiv2.append(p);
+                    mainDiv.append(anchor);
+                    mainDiv.append(subDiv2);
                     mainDiv.addClass("venues");
 
                     $("#location").append(mainDiv);
