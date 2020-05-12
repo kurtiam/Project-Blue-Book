@@ -109,7 +109,6 @@ $("#find-venue").on("click", function (event) {
                 var subDiv1 = $("<div>");
                 var subDiv2 = $("<div>");
                 anchor.append(data.restaurants[i].restaurant.name);
-                anchor.addClass("venueName");
                 anchor.attr("href", data.restaurants[i].restaurant.url);
                 anchor.attr("target", "_blank");
                 subDiv2.append(data.restaurants[i].restaurant.location.address + "<br>");
@@ -125,7 +124,6 @@ $("#find-venue").on("click", function (event) {
                 mainDiv.append(anchor);
                 mainDiv.append(subDiv1);
                 mainDiv.append(subDiv2);
-                mainDiv.addClass("venues");
                 $("#location").append(mainDiv);
 
             }
