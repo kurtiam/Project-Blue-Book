@@ -1,6 +1,5 @@
 var page = 0;
 
-
 //popluate venues within 25 miles of DFW area. Each page can only show 200 results. Will need to do a 2nd api call and append  
 function searchIt() {
     $('#myList').empty();
@@ -69,10 +68,7 @@ $("#myList").on("change", function (event) {
             data: "{}",
             success: function (data) {
                 loc = data._embedded.venues[0].location
-                // console.log("Venue: " + place);
-                // console.log("Latitude: " + loc.latitude);
-                // console.log("Longitude: " + loc.longitude);
-                // $("#location").html("<p>" + place + "<br>" + loc.latitude + "<br>" + loc.longitude + "</p>")
+
             }
         });
 
@@ -88,6 +84,9 @@ $("#find-venue").on("click", function (event) {
 
 
     ZOMATO_URL = "https://developers.zomato.com/api/v2.1/search?lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=20000&sort=real_distance&order=asc&apikey=328747b9fe3568204c420f6a98d2be68";
+    // ZOMATO_URL2 = "https://developers.zomato.com/api/v2.1/search?&start=19&count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
+    // ZOMATO_URL3 = "https://developers.zomato.com/api/v2.1/search?&start=39&count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
+
 
     $.ajax({
         url: ZOMATO_URL,
@@ -99,10 +98,11 @@ $("#find-venue").on("click", function (event) {
             autoList = [];
             p3 = '<option value="-1"></option>';
 
+
+
             for (var i = 0; i < data.restaurants.length; i++) {
                 p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
                 autoList += data.restaurants[i].restaurant.name + "<br>"
-
 
                 var anchor = $("<a>");
                 var mainDiv = $("<div>");
@@ -122,7 +122,7 @@ $("#find-venue").on("click", function (event) {
                 }
                 subDiv1.append("Cost: ", span);
                 subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
-
+                // console.log(data.restaurants[i].restaurant.featured_image);
 
                 subDiv2.attr("onError", "this.style.display='none'");
 
@@ -139,6 +139,11 @@ $("#find-venue").on("click", function (event) {
             }
         }
     });
+
+    zPage2()
+    zPage3()
+    zPage4()
+
 
 });
 
