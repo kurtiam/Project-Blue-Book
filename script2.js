@@ -107,23 +107,26 @@ $("#find-venue").on("click", function (event) {
                 var priceRange = data.restaurants[i].restaurant.price_range;
                 var span = $("<span>");
                 var subDiv1 = $("<div>");
-                var subDiv2 = $("<div>");
+                var subDiv2 = $("<img>");
+
                 anchor.append(data.restaurants[i].restaurant.name);
                 anchor.attr("href", data.restaurants[i].restaurant.url);
                 anchor.attr("target", "_blank");
-                subDiv2.append(data.restaurants[i].restaurant.location.address + "<br>");
-                subDiv2.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
+                anchor.addClass("resName");
+                subDiv1.append(data.restaurants[i].restaurant.location.address + "<br>");
+                subDiv1.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
                 for (var cost = 0; cost < priceRange; cost++) {
                     span.append("$");
                 }
-                subDiv2.append("Cost: ", span);
-
+                subDiv1.append("Cost: ", span);
+                subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
+                mainDiv.html(subDiv2);
+                subDiv2.addClass("imgDisplay");
                 p.append("<hr>");
                 p.append(anchor);
-                subDiv2.append(p);
+                subDiv1.append(p);
                 mainDiv.append(anchor);
                 mainDiv.append(subDiv1);
-                mainDiv.append(subDiv2);
                 $("#location").append(mainDiv);
 
             }
