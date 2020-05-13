@@ -110,8 +110,7 @@ $("#find-venue").on("click", function (event) {
                 var priceRange = data.restaurants[i].restaurant.price_range;
                 var span = $("<span>");
                 var subDiv1 = $("<div>");
-                var subDiv2 = $("<img alt='Project Blue Book'" + "onerror=" + '"this.style.display=' + "'none'" + '">');
-
+                var subDiv2 = $("<img>");
                 anchor.append(data.restaurants[i].restaurant.name);
                 anchor.attr("href", data.restaurants[i].restaurant.url);
                 anchor.attr("target", "_blank");
@@ -123,6 +122,10 @@ $("#find-venue").on("click", function (event) {
                 }
                 subDiv1.append("Cost: ", span);
                 subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
+
+
+                subDiv2.attr("onError", "this.style.display='none'");
+
                 mainDiv.html(subDiv2);
                 subDiv2.addClass("imgDisplay");
                 p.append("<hr>");
@@ -130,6 +133,7 @@ $("#find-venue").on("click", function (event) {
                 subDiv1.append(p);
                 mainDiv.append(anchor);
                 mainDiv.append(subDiv1);
+
                 $("#location").append(mainDiv);
 
             }
