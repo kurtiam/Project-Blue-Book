@@ -120,7 +120,7 @@ $("#find-venue").on("click", function (event) {
                 }
                 subDiv1.append("Cost: ", span);
                 subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
-                subDiv2.attr("alt", "image");
+                subDiv2.attr("onError", "this.style.display='none'");
                 mainDiv.html(subDiv2);
                 subDiv2.addClass("imgDisplay");
                 p.append("<hr>");
@@ -129,7 +129,6 @@ $("#find-venue").on("click", function (event) {
                 mainDiv.append(anchor);
                 mainDiv.append(subDiv1);
 
-                $(".imgDisplay").attr("...");
                 $("#location").append(mainDiv);
 
             }
