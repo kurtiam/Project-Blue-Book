@@ -111,6 +111,7 @@ $("#find-venue").on("click", function (event) {
                 var span = $("<span>");
                 var subDiv1 = $("<div>");
                 var subDiv2 = $("<img>");
+
                 anchor.append(data.restaurants[i].restaurant.name);
                 anchor.attr("href", data.restaurants[i].restaurant.url);
                 anchor.attr("target", "_blank");
@@ -122,7 +123,8 @@ $("#find-venue").on("click", function (event) {
                 }
                 subDiv1.append("Cost: ", span);
                 subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
-                // console.log(data.restaurants[i].restaurant.featured_image);
+                subDiv2.attr("onError", "this.style.display='none'");
+
 
                 subDiv2.attr("onError", "this.style.display='none'");
 
