@@ -1,10 +1,12 @@
 var page = 0;
 
+
 //popluate venues within 25 miles of DFW area. Each page can only show 200 results. Will need to do a 2nd api call and append  
-$(document).ready(function () {
+function searchIt() {
+    $('#myList').empty();
     $.ajax({
         type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/venues.json?&latlong=32.79067196,-96.81081803&dmaId=261&apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&sort=name,asc&radius=25&unit=miles&size=200&page=0",
+        url: "https://app.ticketmaster.com/discovery/v2/venues.json?&latlong=" + latlong + "&apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&sort=name,asc&radius=25&unit=miles&size=200&page=0",
         async: false,
         dataType: "json",
         success: function (data) {
@@ -27,11 +29,12 @@ $(document).ready(function () {
         }
 
         // 2nd api call for venues over 200 then append to #mylist selection in index.
+
     });
 
     $.ajax({
         type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/venues.json?&latlong=32.79067196,-96.81081803&dmaId=261&apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&sort=name,asc&radius=25&unit=miles&size=200&page=1",
+        url: "https://app.ticketmaster.com/discovery/v2/venues.json?&latlong=" + latlong + "&dmaId=261&apikey=IbUXFudvQmR2gZo5kLDiuVkaZTavZiEV&sort=name,asc&radius=25&unit=miles&size=200&page=1",
         async: false,
         timeout: 30000,
         dataType: "json",
@@ -48,7 +51,7 @@ $(document).ready(function () {
         }
     });
 
-});
+};
 
 // will find the above selected venues location (lat and long) and store in variables: loc.latitude and loc.longitude
 $("#myList").on("change", function (event) {
@@ -107,25 +110,26 @@ $("#find-venue").on("click", function (event) {
                 var priceRange = data.restaurants[i].restaurant.price_range;
                 var span = $("<span>");
                 var subDiv1 = $("<div>");
-                var subDiv2 = $("<div>");
+                var subDiv2 = $("<img alt='Project Blue Book'" + "onerror=" + '"this.style.display=' + "'none'" + '">');
+
                 anchor.append(data.restaurants[i].restaurant.name);
-                anchor.addClass("venueName");
                 anchor.attr("href", data.restaurants[i].restaurant.url);
                 anchor.attr("target", "_blank");
-                subDiv2.append(data.restaurants[i].restaurant.location.address + "<br>");
-                subDiv2.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
+                anchor.addClass("resName");
+                subDiv1.append(data.restaurants[i].restaurant.location.address + "<br>");
+                subDiv1.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
                 for (var cost = 0; cost < priceRange; cost++) {
                     span.append("$");
                 }
-                subDiv2.append("Cost: ", span);
-
+                subDiv1.append("Cost: ", span);
+                subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
+                mainDiv.html(subDiv2);
+                subDiv2.addClass("imgDisplay");
                 p.append("<hr>");
                 p.append(anchor);
-                subDiv2.append(p);
+                subDiv1.append(p);
                 mainDiv.append(anchor);
                 mainDiv.append(subDiv1);
-                mainDiv.append(subDiv2);
-                mainDiv.addClass("venues");
                 $("#location").append(mainDiv);
 
             }
@@ -133,6 +137,5 @@ $("#find-venue").on("click", function (event) {
     });
 
 });
-
 
 
