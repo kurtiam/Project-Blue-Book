@@ -49,23 +49,57 @@
             </div>
             <div class="col-sm-4 column"
                 style="background-image: linear-gradient(rgb(170, 165, 165), yellowgreen, #0b5b9c)" ;>
-
+                <!-- 
                 <input id="city-search" type="text" style='width: 370px' placeholder="Enter City, State"></input>
                 <input id='city' onclick='' type="submit" value="Search New City"> </input>
-                <br></br>
-                <form id="event-form">
+                <br></br> -->
+
+
+                <br>
+                <div id="wrapper">
+                    <li class="input-button">
+                        <div class="input-wrapper" style="float:left;">
+                            <input type="text" id="city-search" class="rq-form-element" autofocus
+                                placeholder="Search by City and State." />
+                            <div id="loader" style="display:none;">
+                                <img src="loader.gif" />
+                            </div>
+                        </div>
+
+                        <div style="float:left;margin-left:10px;">
+                            <button id="city" type="button" class="btn-style" onclick="find();">Search
+                                New City</button>
+
+                        </div>
+                        <br><br><br>
+                        <div style="float:left;" class="input-wrapper">
+
+                            <select id="myList" class="select-css" style="width: 450px" autofocus>
+                            </select>
+                        </div>
+                        <div style="float:left;margin-left:10px;">
+                            <button id="find-venue" type="button" class="btn-style" onclick="">Find A Place to Eat
+
+                            </button>
+                        </div>
+                    </li>
+                </div><br>
+
+
+
+                <!-- <form id="event-form">
                     <select id="myList" style="width: 500px" autofocus>
                     </select>
                     <br><br>
-                    <input id="find-venue" type="submit" value="Find A Place" style="width: 500px">
+                    <button id="find-venue" type="button" class="btn-style"> Find A Place</button>
                     <br><br>
-                    <!-- <div id="food-type"></div>
+                    <div id="food-type"></div>
                     <select id="sel_user" style="width: 500px"> -->
-                    </select>
-                    <!-- <br><br>
+                <!-- </select> -->
+                <!-- <br><br>
                     <input id="find-cuisine" type="submit" value="Search" style="width: 500px">
                     <br><br> -->
-                </form>
+                <!-- </form>  -->
 
                 <div id="venue-view"></div>
                 <br>
