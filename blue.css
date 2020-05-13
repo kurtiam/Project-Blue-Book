@@ -26,14 +26,26 @@ color: #084374;
 }
 
 .imgDisplay{
-width: 150px;
-height: 150px;
+width: 200px;
+height: 200px;
+padding: 10px;
+transition: transform .2s; /* Animation */
+}
 
+.imgDisplay:hover {
+  transform: scale(1.5);
 }
 
 .resName::before{
   content: "\a";
   white-space: pre;
+}
+
+.resName{
+  color: white;
+  font-style: bold;
+  font-size: large;
+
 }
 
 .tagLine {
