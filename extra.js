@@ -12,7 +12,6 @@ $(document).ready(function () {
     });
 });
 
-
 getLocation();
 
 function getLocation() {
@@ -36,7 +35,6 @@ function getLocation() {
         console.log("Current Latitude: " + lat);
         console.log("Current Longitude: " + lon);
         currentCity()
-
 
     }
 };
@@ -63,10 +61,11 @@ function currentCity() {
             city = findCity.results[0].components.city
             state = findCity.results[0].components.state_code
             console.log(city);
-            if (town === "undefined") {
-                local = city
+
+            if (city == null) {
+                local = town
             }
-            else { local = town };
+            else { local = city };
 
             $('#city-search').attr("placeholder", "Current City is " + local + "," + state);
 
@@ -96,9 +95,192 @@ function citySearch() {
             city = findCity.results[0].components.city //may need to add logic for .town
             state = findCity.results[0].components.state_code
             latlong = lat + ',' + lon
-
             searchIt()
         }
+
+    });
+
+}
+
+
+function zPage2() {
+
+    ZOMATO_URL2 = "https://developers.zomato.com/api/v2.1/search?&start=20&count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
+    $.ajax({
+        url: ZOMATO_URL2,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        timeout: 5000,
+        success: function (data) {
+            p3 = '<option value="-1"></option>';
+            autoList = [];
+
+
+            for (var i = 0; i < data.restaurants.length; i++) {
+                p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
+                autoList += data.restaurants[i].restaurant.name + "<br>"
+
+                var anchor = $("<a>");
+                var mainDiv = $("<div>");
+                var p = $("<p>");
+                var priceRange = data.restaurants[i].restaurant.price_range;
+                var span = $("<span>");
+                var subDiv1 = $("<div>");
+                var subDiv2 = $("<img>");
+                anchor.append(data.restaurants[i].restaurant.name);
+                anchor.attr("href", data.restaurants[i].restaurant.url);
+                anchor.attr("target", "_blank");
+                anchor.addClass("resName");
+                subDiv1.append(data.restaurants[i].restaurant.location.address + "<br>");
+                subDiv1.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
+                for (var cost = 0; cost < priceRange; cost++) {
+                    span.append("$");
+                }
+                subDiv1.append("Cost: ", span);
+                subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
+                // console.log(data.restaurants[i].featured_image);
+
+                subDiv2.attr("onError", "this.style.display='none'");
+
+                mainDiv.html(subDiv2);
+                subDiv2.addClass("imgDisplay");
+                p.append("<hr>");
+                p.append(anchor);
+                subDiv1.append(p);
+                mainDiv.append(anchor);
+                mainDiv.append(subDiv1);
+
+                $("#location").append(mainDiv);
+
+            }
+
+
+        }
+
+
+    });
+
+}
+
+
+
+function zPage3() {
+
+    ZOMATO_URL3 = "https://developers.zomato.com/api/v2.1/search?&start=40&count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
+    $.ajax({
+        url: ZOMATO_URL3,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        timeout: 5000,
+        success: function (data) {
+            p3 = '<option value="-1"></option>';
+            autoList = [];
+
+
+            for (var i = 0; i < data.restaurants.length; i++) {
+                p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
+                autoList += data.restaurants[i].restaurant.name + "<br>"
+
+                var anchor = $("<a>");
+                var mainDiv = $("<div>");
+                var p = $("<p>");
+                var priceRange = data.restaurants[i].restaurant.price_range;
+                var span = $("<span>");
+                var subDiv1 = $("<div>");
+                var subDiv2 = $("<img>");
+                anchor.append(data.restaurants[i].restaurant.name);
+                anchor.attr("href", data.restaurants[i].restaurant.url);
+                anchor.attr("target", "_blank");
+                anchor.addClass("resName");
+                subDiv1.append(data.restaurants[i].restaurant.location.address + "<br>");
+                subDiv1.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
+                for (var cost = 0; cost < priceRange; cost++) {
+                    span.append("$");
+                }
+                subDiv1.append("Cost: ", span);
+                subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
+                // console.log(data.restaurants[i].featured_image);
+
+                subDiv2.attr("onError", "this.style.display='none'");
+
+                mainDiv.html(subDiv2);
+                subDiv2.addClass("imgDisplay");
+                p.append("<hr>");
+                p.append(anchor);
+                subDiv1.append(p);
+                mainDiv.append(anchor);
+                mainDiv.append(subDiv1);
+
+                $("#location").append(mainDiv);
+
+            }
+
+
+        }
+
+
+    });
+
+}
+
+
+function zPage4() {
+
+    ZOMATO_URL4 = "https://developers.zomato.com/api/v2.1/search?&start=60&count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
+    $.ajax({
+        url: ZOMATO_URL4,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        timeout: 5000,
+        success: function (data) {
+            p3 = '<option value="-1"></option>';
+            autoList = [];
+
+
+            for (var i = 0; i < data.restaurants.length; i++) {
+                p3 += '<option value="' + data.restaurants[i].restaurant.name + '">' + data.restaurants[i].restaurant.name + '</option>';
+                autoList += data.restaurants[i].restaurant.name + "<br>"
+
+                var anchor = $("<a>");
+                var mainDiv = $("<div>");
+                var p = $("<p>");
+                var priceRange = data.restaurants[i].restaurant.price_range;
+                var span = $("<span>");
+                var subDiv1 = $("<div>");
+                var subDiv2 = $("<img>");
+                anchor.append(data.restaurants[i].restaurant.name);
+                anchor.attr("href", data.restaurants[i].restaurant.url);
+                anchor.attr("target", "_blank");
+                anchor.addClass("resName");
+                subDiv1.append(data.restaurants[i].restaurant.location.address + "<br>");
+                subDiv1.append("Cuisines: " + data.restaurants[i].restaurant.cuisines + "<br>");
+                for (var cost = 0; cost < priceRange; cost++) {
+                    span.append("$");
+                }
+                subDiv1.append("Cost: ", span);
+                subDiv2.attr("src", data.restaurants[i].restaurant.featured_image);
+                // console.log(data.restaurants[i].featured_image);
+
+                subDiv2.attr("onError", "this.style.display='none'");
+
+                mainDiv.html(subDiv2);
+                subDiv2.addClass("imgDisplay");
+                p.append("<hr>");
+                p.append(anchor);
+                subDiv1.append(p);
+                mainDiv.append(anchor);
+                mainDiv.append(subDiv1);
+
+                $("#location").append(mainDiv);
+
+            }
+
+
+        }
+
 
     });
 
