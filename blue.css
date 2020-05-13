@@ -25,6 +25,16 @@ color: #084374;
 
 }
 
+.imgDisplay{
+width: 150px;
+height: 150px;
+
+}
+
+.resName::before{
+  content: "\a";
+  white-space: pre;
+}
 
 .tagLine {
     text-align: center;
