@@ -109,9 +109,9 @@ function zPage2() {
     $.ajax({
         url: ZOMATO_URL2,
         method: "GET",
-        async: false,
+        async: true,
         dataType: "json",
-        timeout: 5000,
+        // timeout: 5000,
         success: function (data) {
             p3 = '<option value="-1"></option>';
             autoList = [];
@@ -171,9 +171,9 @@ function zPage3() {
     $.ajax({
         url: ZOMATO_URL3,
         method: "GET",
-        async: false,
+        async: true,
         dataType: "json",
-        timeout: 5000,
+        // timeout: 5000,
         success: function (data) {
             p3 = '<option value="-1"></option>';
             autoList = [];
@@ -232,9 +232,9 @@ function zPage4() {
     $.ajax({
         url: ZOMATO_URL4,
         method: "GET",
-        async: false,
+        async: true,
         dataType: "json",
-        timeout: 5000,
+        // timeout: 5000,
         success: function (data) {
             p3 = '<option value="-1"></option>';
             autoList = [];
@@ -285,3 +285,4 @@ function zPage4() {
     });
 
 }
+
