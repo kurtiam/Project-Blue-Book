@@ -220,10 +220,6 @@ input:checked + .slider:after {
   left: 5px;
 }
 
-<<<<<<< HEAD
-=======
-
-
 body {
   background: #f5fffa;
   font-family: 'Lora', serif;
@@ -364,4 +360,3 @@ body {
   background: red;
   white-space: nowrap;
 }
->>>>>>> master
