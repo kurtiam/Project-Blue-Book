@@ -143,7 +143,6 @@ $("#find-venue").on("click", function (event) {
     zPage2()
     zPage3()
     zPage4()
-    zpage1()
 
 
 });
