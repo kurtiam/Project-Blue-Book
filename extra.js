@@ -9,6 +9,55 @@ $(document).ready(function () {
         console.log(cityNow);
         citySearch()
 
+        // ZOMATO_URL1 = "https://developers.zomato.com/api/v2.1/collections?lat=" + lat + "&lon=" + lon + "&count=5&apikey=328747b9fe3568204c420f6a98d2be68";
+        // $.ajax({
+        //     url: ZOMATO_URL1,
+        //     method: "GET",
+        //     async: false,
+        //     dataType: "json",
+        //     timeout: 5000,
+        //     success: function (data) {
+        //         for (var i = 0; i < data.collections.length; i++) {
+
+        //             // var title = data.collections.collection[i].title;
+        //             // var des = data.collections.collection[i].description;
+        //             // var url = data.collections.collection[i].url;
+        //             // var image = data.collections.collection[i].image_url;
+
+        //             var p = $("<p>");
+        //             var anchor = $("<a>");
+        //             var subDiv1 = $("<img>");
+        //             var newDiv = $("<div>");
+
+        //             p.append(data.collections[i].collection.title);
+        //             p.append(data.collections[i].collection.description);
+        //             anchor.attr("href", data.collections[i].collection.url);
+        //             subDiv1.attr("src", data.collections[i].collection.image_url);
+
+        //             newDiv.html(p);
+        //             newDiv.html(anchor);
+        //             newDiv.html(subDiv1);
+
+        //             $("#location").append(newDiv);
+
+
+
+
+        //             // newDiv.append($("<p>").text("Name: " + title));
+        //             // newDiv.append($("<p>").text("Description: " + des));
+        //             // newDiv.append($("<a>").attr("href", url).text("See more"));
+        //             // newDiv.append($("<img>").attr("src", image));
+
+        //             // appends the new div to the existing "trending" div
+        //             // mainDiv.append(newDiv);
+        //             // mainDiv.append($("<hr>"));
+        //         }
+
+
+        //     }
+
+        // });
+
     });
 });
 
@@ -285,3 +334,47 @@ function zPage4() {
     });
 
 }
+
+$("#city").click(function () {
+
+
+    ZOMATO_URL1 = "https://developers.zomato.com/api/v2.1/collections?lat=" + lat + "&lon=" + lon + "&count=15&apikey=328747b9fe3568204c420f6a98d2be68";
+    $.ajax({
+        url: ZOMATO_URL1,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        timeout: 5000,
+        success: function (data) {
+            for (var i = 0; i < data.collections.length; i++) {
+
+                var subDivF = $("<div>");
+                var anchorE = $("<a>");
+                var img = $("<img>");
+                var newDiv = $("<div>");
+
+                anchorE.append(data.collections[i].collection.title + "<br>");
+                subDivF.append(data.collections[i].collection.description);
+                subDivF.addClass("trendingDescription");
+                anchorE.attr("href", data.collections[i].collection.url);
+                img.attr("src", data.collections[i].collection.image_url);
+                img.addClass("trendingImage");
+
+                newDiv.append(anchorE);
+                newDiv.append(subDivF);
+                newDiv.append(img);
+
+
+                $("#location").append(newDiv);
+
+            }
+
+
+        }
+
+    });
+
+});
+
+
+
