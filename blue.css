@@ -24,6 +24,18 @@ color: #084374;
 
 }
 
+.trendingImage{
+max-width: 185px;
+height: 135px;
+margin-bottom: 20px; 
+margin-top: 20px;
+
+}
+
+.trendingDescription{
+font-family: 'BenchNine', sans-serif;
+}
+
 .imgDisplay{
 position: relative;
 border-radius: 15%;
@@ -207,8 +219,6 @@ input:checked + .slider:after {
   content: "Event";
   left: 5px;
 }
-
-
 
 body {
   background: #f5fffa;
