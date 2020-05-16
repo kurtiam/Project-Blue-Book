@@ -40,7 +40,7 @@ margin: auto;
   .card {
       width: 33.33%;
       display: inline-block;
-      float: left;
+      /* float: left; */
       padding: auto;
       height: 750px;
       position: responsive;
@@ -54,12 +54,13 @@ margin: auto;
   }
 
  img {
+
     height: 200%;
     width: 100;
     z-index: 1;
     margin: 0px;  
-}
-   */
+} 
+  
  
       img {
         width: 100%;
@@ -79,6 +80,10 @@ margin: auto;
   margin-bottom: 20px; 
   margin-top: 20px;
   margin-left: 250px;
+  max-width: 185px;
+  height: 135px;
+  margin-bottom: 20px; 
+  margin-top: 20px;
      
   }
   
@@ -99,6 +104,9 @@ margin: auto;
     /* height: 200px; */
 
   }
+  
+  
+  
   
   .imgDisplay{
   position: relative;
@@ -416,3 +424,5 @@ margin: auto;
     background: red;
     white-space: nowrap;
   }
+  
+  
