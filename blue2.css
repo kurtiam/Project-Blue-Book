@@ -5,7 +5,7 @@
 body {
     
     width: 100vw;
-height: 123vh;
+height: 95vh;
 margin: auto;
   background: #f5fffa;
   font-family: 'Lora', serif;
@@ -26,11 +26,7 @@ margin: auto;
     font-weight: bold;
   }
 
-  /* main {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
-  } */
-
+  
   .row {
       width: 100%;
       float: left;
@@ -53,6 +49,7 @@ margin: auto;
       }
   }
 
+
  img {
 
     height: 200%;
@@ -61,18 +58,17 @@ margin: auto;
     margin: 0px;  
 } 
   
- 
-      img {
-        width: 100%;
-        height: 750px;
-      }
+
+
+      @media screen and (max-width: 600px) {
+
+        .column {display:none;}
+    
+    }
+      
      
   
-  .btn {
-  background-color: yellowgreen;
-  color: #084374;
-  
-  }
+ 
   
   .trendingImage{
   max-width: 50%;
@@ -114,9 +110,10 @@ margin: auto;
   max-width: 185px;
   float: right;
   height: 135px;
-  margin-right: 65px;
-  margin-bottom: 5px;
+  margin-right: 35px;
+  margin-bottom: 7px;
   margin-top: 1px;
+  padding-left: 7px;
   object-fit: cover;
   transition: transform .2s; /* Animation */
   }
@@ -145,7 +142,7 @@ margin: auto;
     font-family: 'BenchNine', sans-serif;
     width: 100%;
     height: 50px;
-    padding-top: 7px;
+    padding-bottom: 7px;
   margin: 0px;
   
   }
@@ -153,10 +150,11 @@ margin: auto;
   .container-fluid {
   background-image: linear-gradient(rgb(170, 165, 165), yellowgreen, #0b5b9c);
   width: 100vw;
-  height: 123vh;
+  height: 80vh;
   background-position: center;
   background-size: cover;
   margin-top: 0px;
+  padding-bottom: 5px;
   
   }
 
@@ -173,11 +171,7 @@ margin: auto;
     clear: both;
   }
   
-  
-  .btn {
-    border-radius: 12px;
-  }
-  
+ 
  
     h4 { 
         z-index: 2;
@@ -220,7 +214,7 @@ margin: auto;
       height: 50px;
       color:yellowgreen;
       text-align: center;
-     bottom: 0;
+     bottom: 0px;
      position: fixed;
      padding-top: 10px;
     }
@@ -302,12 +296,12 @@ margin: auto;
     width: calc(100% - 155px)
   }
   #city-search {
-    padding: 10px 5px;
+    padding: 1px 2px 1px 15px;
     font: bold 16px'lucida sans', 'trebuchet MS', 'Tahoma';
     border: 1px solid #a4c3ca;
     background: #f1f1f1;
     border-radius: 5em;
-    width: 100%;
+    width: 95%;
     outline: none;
     /* padding-left: 150px; */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);
