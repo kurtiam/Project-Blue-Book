@@ -103,6 +103,53 @@ function citySearch() {
 }
 
 
+
+
+$("#city-search").change(function () {
+    $('#location').empty();
+
+    ZOMATO_URL1 = "https://developers.zomato.com/api/v2.1/collections?lat=" + lat + "&lon=" + lon + "&count=15&apikey=328747b9fe3568204c420f6a98d2be68";
+    $.ajax({
+        url: ZOMATO_URL1,
+        method: "GET",
+        async: false,
+        dataType: "json",
+        timeout: 5000,
+        success: function (data) {
+            for (var i = 0; i < data.collections.length; i++) {
+
+                var subDivF = $("<div>");
+                var anchorE = $("<a>");
+                var img = $("<img>");
+                var newDiv = $("<div>");
+
+                anchorE.append(data.collections[i].collection.title + "<br>");
+                subDivF.append(data.collections[i].collection.description);
+                subDivF.addClass("trendingDescription");
+                anchorE.addClass("trendingTitle");
+                anchorE.attr("href", data.collections[i].collection.url);
+                img.attr("src", data.collections[i].collection.image_url);
+                img.addClass("trendingImage");
+                newDiv.addClass("img");
+
+                newDiv.append(anchorE);
+                newDiv.append(subDivF);
+                newDiv.append(img);
+
+
+                $("#location").append(newDiv);
+
+            }
+
+
+        }
+
+    });
+
+});
+
+
+
 function zPage2() {
 
     ZOMATO_URL2 = "https://developers.zomato.com/api/v2.1/search?&start=20&count=20&lat=" + loc.latitude + "&lon=" + loc.longitude + "&radius=5&sort=real_distance&order=asc&apikey=&apikey=328747b9fe3568204c420f6a98d2be68";
@@ -285,4 +332,7 @@ function zPage4() {
     });
 
 }
+
+
+
 
