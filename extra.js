@@ -6,7 +6,7 @@ $(document).ready(function () {
     // Get value on button click and show alert
     $("#city-search").change(function () {
         cityNow = $("#city-search").val();
-        // console.log(cityNow);
+        console.log(cityNow);
         citySearch()
 
     });
@@ -60,7 +60,7 @@ function currentCity() {
             town = findCity.results[0].components.town
             city = findCity.results[0].components.city
             state = findCity.results[0].components.state_code
-            console.log(city);
+            // console.log(city);
 
             if (city == null) {
                 local = town
@@ -98,6 +98,8 @@ function citySearch() {
             state = findCity.results[0].components.state_code
             latlong = lat + ',' + lon
             $('#tag').html("<h3 id='tag' class='tagLine'><span class='TorT'> Tickets or Tables. </span> Create A FUN Night Out in " + city + "</h3>");
+            // $('#city-search').empty();
+            // $('#city-search').attr("placeholder", "Current City is " + local + "," + state);
             searchIt()
             trend();
         }
@@ -113,6 +115,8 @@ $(document).ready(function () {
         cityNow = $("#city-search").val();
         trend();
 
+
+
     });
 });
 
@@ -120,7 +124,7 @@ $(document).ready(function () {
 
 function trend() {
 
-    // $('#location').empty();
+    $('#location').empty();
 
     ZOMATO_URL1 = "https://developers.zomato.com/api/v2.1/collections?lat=" + lat + "&lon=" + lon + "&count=15&apikey=328747b9fe3568204c420f6a98d2be68";
     $.ajax({
@@ -142,7 +146,7 @@ function trend() {
                 subDivF.addClass("trendingDescription");
                 anchorE.addClass("trendingTitle");
                 anchorE.attr("href", data.collections[i].collection.url);
-                console.log(data);
+                // console.log(data);
                 img.attr("src", data.collections[i].collection.image_url);
                 img.addClass("trendingImage");
                 newDiv.addClass("img");

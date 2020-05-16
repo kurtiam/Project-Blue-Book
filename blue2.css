@@ -69,22 +69,24 @@ margin: auto;
       .trendingDescription{
       font-family: 'BenchNine', sans-serif;
       font-size: 20px;
-      margin-left: 175px;
-      width: 300px;
+      margin-left: 150px;
+      width: 360px;
+      text-align: center;
           
     }
 
       .trendingTitle {
         font-family: 'BenchNine', sans-serif;
         font-size: 30px;
-        margin-left: 175px;
-        max-width: 200px;
+        margin-left: 250px;
+        max-width: 360px;
+      
     }
  
     
     
       .trendingImage{
-        max-width: 50%;
+        max-width: 55%;
         height: 20%;
         margin-bottom: 20px; 
         margin-top: 20px;
@@ -300,6 +302,11 @@ margin: auto;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
     background-color: lightblue;
     outline: none;
+    display: inline-block;
+    vertical-align: middle;
+
+
+ 
   }
   
   
@@ -358,8 +365,7 @@ margin: auto;
       background-size: .65em auto, 100%;
   }
   
-  
-  
+    
   .select-css::-ms-expand {
     display: none;
   }
@@ -399,4 +405,10 @@ margin: auto;
     white-space: nowrap;
   }
   
-  
+  .icon-align {
+    position: relative;
+    /* Adjust these values accordingly */
+    top: 1px;
+    left: 1px;
+    vertical-align: middle;
+ }
