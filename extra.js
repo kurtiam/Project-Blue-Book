@@ -4,7 +4,7 @@ var cityNow = null;
 
 $(document).ready(function () {
     // Get value on button click and show alert
-    $("#city").click(function () {
+    $("#city-search").change(function () {
         cityNow = $("#city-search").val();
         console.log(cityNow);
         citySearch()
@@ -32,8 +32,8 @@ function getLocation() {
         lon = position.coords.longitude
 
         position.coords.latitude + "+" + position.coords.longitude
-        console.log("Current Latitude: " + lat);
-        console.log("Current Longitude: " + lon);
+        // console.log("Current Latitude: " + lat);
+        // console.log("Current Longitude: " + lon);
         currentCity()
 
     }
@@ -60,7 +60,7 @@ function currentCity() {
             town = findCity.results[0].components.town
             city = findCity.results[0].components.city
             state = findCity.results[0].components.state_code
-            console.log(city);
+            // console.log(city);
 
             if (city == null) {
                 local = town
@@ -68,8 +68,10 @@ function currentCity() {
             else { local = city };
 
             $('#city-search').attr("placeholder", "Current City is " + local + "," + state);
-
+            $('#tag').html("<h3 id='tag' class='tagLine'><span class='TorT'> Tickets or Tables. </span> Create A FUN Night Out in " + local + "</h3>");
             searchIt()
+            $("#city").trigger('click');
+            trend();
 
         }
 
@@ -95,21 +97,40 @@ function citySearch() {
             city = findCity.results[0].components.city //may need to add logic for .town
             state = findCity.results[0].components.state_code
             latlong = lat + ',' + lon
+            $('#tag').html("<h3 id='tag' class='tagLine'><span class='TorT'> Tickets or Tables. </span> Create A FUN Night Out in " + city + "</h3>");
+            // $('#city-search').empty();
+            // $('#city-search').attr("placeholder", "Current City is " + local + "," + state);
             searchIt()
+            trend();
         }
 
     });
 
 }
 
-$("#city").click(function () {
 
+$(document).ready(function () {
+    // Get value on button click and show alert
+    $("#city").click(function () {
+        cityNow = $("#city-search").val();
+        trend();
+
+
+
+    });
+});
+
+// $("#city").click(function () {
+
+function trend() {
+
+    $('#location').empty();
 
     ZOMATO_URL1 = "https://developers.zomato.com/api/v2.1/collections?lat=" + lat + "&lon=" + lon + "&count=15&apikey=328747b9fe3568204c420f6a98d2be68";
     $.ajax({
         url: ZOMATO_URL1,
         method: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         timeout: 5000,
         success: function (data) {
@@ -123,16 +144,20 @@ $("#city").click(function () {
                 anchorE.append(data.collections[i].collection.title + "<br>");
                 subDivF.append(data.collections[i].collection.description);
                 subDivF.addClass("trendingDescription");
+                anchorE.addClass("trendingTitle");
                 anchorE.attr("href", data.collections[i].collection.url);
+                // console.log(data);
                 img.attr("src", data.collections[i].collection.image_url);
                 img.addClass("trendingImage");
+                newDiv.addClass("img");
 
                 newDiv.append(anchorE);
                 newDiv.append(subDivF);
                 newDiv.append(img);
 
-
                 $("#location").append(newDiv);
+                lat = "";
+                lon = "";
 
             }
 
@@ -141,7 +166,8 @@ $("#city").click(function () {
 
     });
 
-});
+};
+
 
 
 
@@ -327,7 +353,5 @@ function zPage4() {
     });
 
 }
-
-
 
 
