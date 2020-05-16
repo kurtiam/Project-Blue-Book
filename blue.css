@@ -24,6 +24,19 @@ color: #084374;
 
 }
 
+.trendingImage{
+max-width: 185px;
+height: 135px;
+margin-bottom: 20px; 
+margin-top: 20px;
+
+}
+
+.trendingDescription{
+font-family: 'BenchNine', sans-serif;
+}
+
+
 .imgDisplay{
 position: relative;
 border-radius: 15%;
@@ -62,21 +75,16 @@ font-size: large;
   height: 50px;
   padding-top: 7px;
 margin: 0px;
+
 }
 
 .container-fluid {
 background-image: linear-gradient(rgb(170, 165, 165), yellowgreen, #0b5b9c);
 width: 100vw;
-height: 100vh;
+height: 123vh;
 background-position: center;
-position: absolute;
-}
-
-.column {
-  float: left;
-  width: 100%;
- height: 750px; 
- position: relative;
+background-size: cover;
+margin-top: 0px;
 
 }
 
@@ -86,14 +94,19 @@ position: absolute;
   clear: both;
 }
 
+
+.btn {
+  border-radius: 12px;
+}
+
 img {
-    height: 750px;
+    height: 200%;
     width: 100%;
     z-index: 1;
     margin: 0px;
 }
   
-  h2 { 
+  h4 { 
       z-index: 2;
       position: relative;
 margin-left: 170px;
@@ -102,13 +115,7 @@ color: #ad3a0c;
 font-family: 'Lobster', cursive;
   }
 
-#event-form {
-  width: 50%;
-  height: auto;
-  /* z-index: 2; */
-  /* margin-right: 50px; */
-  position: relative;
-}
+
 
 #find-venue {
 width: 125px;;
@@ -207,7 +214,6 @@ input:checked + .slider:after {
   content: "Event";
   left: 5px;
 }
-
 
 
 body {
@@ -350,3 +356,4 @@ body {
   background: red;
   white-space: nowrap;
 }
+
