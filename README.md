@@ -13,9 +13,12 @@ Project BLUE Book is a website where customers can look for events within any ma
 
 
 ## User Story
-As a customer--
-Select your city to search then select an event or venue. After you have selected your venue click restaurants and it will provide you with a list of restaurants and bars
-within a 5 mile radius to the event venue. The restaurant list will include address, cuisine, and estimated cost.
+As a customer
+I want to select a city to search then select an event or venue, 
+so that I can select a restaurant/bar that will be within a 5 mile radius to the event venue. 
+Given so many choices of things to do we help the user narrow down their options of restaurants/bars near an event.
+When a city is named and submited, a list of event venues/areas will be displayed.
+Then you will select your venue and then select a restaurant within 5 miles of the venue. The restaurant list will include address, cuisine, and estimated cost.
 
 
 ## Key Elements & Features
