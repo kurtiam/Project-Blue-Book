@@ -54,13 +54,17 @@ margin: auto;
         width: 100%;
         height: 765px;
       }
+
+
+      @media screen and (max-width: 600px) {
+
+        .column {display:none;}
+    
+    }
+      
      
   
-  .btn {
-  background-color: yellowgreen;
-  color: #084374;
-  
-  }
+ 
   
   .trendingImage{
   max-width: 185px;
@@ -259,12 +263,12 @@ margin: auto;
     width: calc(100% - 155px)
   }
   #city-search {
-    padding: 2px;
+    padding: 1px 2px 1px 15px;
     font: bold 16px'lucida sans', 'trebuchet MS', 'Tahoma';
     border: 1px solid #a4c3ca;
     background: #f1f1f1;
     border-radius: 5em;
-    width: 100%;
+    width: 95%;
     outline: none;
     /* padding-left: 150px; */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);
